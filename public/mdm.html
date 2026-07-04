@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0b1220">
+  <title>MDM 安裝頁面</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #0b1220;
+      --card: #ffffff;
+      --text: #0b1220;
+      --muted: #5b657a;
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.18);
+      --radius: 18px;
+      --brand: #2563eb;
+      --brand-press: #1d4ed8;
+      --danger-bg: #fff1f2;
+      --danger: #b91c1c;
+      --warn-bg: #fff7ed;
+      --warn: #9a3412;
+      --ok-bg: #ecfdf5;
+      --ok: #047857;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 18px 14px 28px;
+      min-height: 100svh;
+      background: radial-gradient(1200px 800px at 10% -20%, rgba(37, 99, 235, 0.35), rgba(11, 18, 32, 0)) ,
+                  radial-gradient(900px 600px at 110% 10%, rgba(16, 185, 129, 0.20), rgba(11, 18, 32, 0)) ,
+                  var(--bg);
+      color: rgba(255, 255, 255, 0.92);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+    }
+
+    #time {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-weight: 600;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .segmented .button {
+      width: 100%;
+      margin: 0;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.88);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .segmented .button.active {
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--text);
+      box-shadow: 0 8px 18px rgba(2, 6, 23, 0.30);
+    }
+
+    .card {
+      background: var(--card);
+      color: var(--text);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .card + .card {
+      margin-top: 14px;
+    }
+
+    .congrats {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-title i {
+      margin-right: 0;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 48px;
+      font-weight: 800;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+      padding: 12px 14px;
+      margin: 10px 0 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .button:active {
+      transform: translateY(1px);
+    }
+
+    a.button {
+      -webkit-touch-callout: none;
+    }
+
+    .button.primary {
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.98), rgba(29, 78, 216, 0.98));
+      border-color: rgba(37, 99, 235, 0.35);
+      color: #fff;
+    }
+
+    .button.primary:active {
+      background: linear-gradient(180deg, rgba(29, 78, 216, 0.98), rgba(29, 78, 216, 0.98));
+    }
+
+    .button.disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .notice {
+      font-size: 14px;
+      line-height: 1.4;
+      border-radius: 14px;
+      padding: 12px 12px;
+      margin: 0 0 12px;
+      border: 1px solid var(--border);
+      background: var(--warn-bg);
+      color: var(--warn);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .notice.ok {
+      display: none;
+    }
+
+    #android-apk-missing {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: rgba(185, 28, 28, 0.18);
+    }
+
+    .note {
+      margin-top: 2px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      color: #991b1b;
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .instructions-step {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fineprint {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.5;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <div class="title">
+        <h1>MDM 安裝</h1>
+        <div id="time">現在時間是 11:56:56</div>
+      </div>
+
+      <div class="segmented" role="tablist" aria-label="選擇平台">
+        <button id="tab-ios" class="button" role="tab" aria-controls="ios-section" onclick="showSection('ios')"><i class="fab fa-apple"></i> iOS</button>
+        <button id="tab-android" class="button" role="tab" aria-controls="android-section" onclick="showSection('android')"><i class="fab fa-android"></i> Android</button>
+      </div>
+    </div>
+
+    <!-- iOS 區塊 -->
+    <div id="ios-section" class="card" role="tabpanel" aria-labelledby="tab-ios">
+      <div class="congrats icon-title"><i class="fab fa-apple"></i> iOS MDM V8.1 安裝</div>
+      <div id="ios-browser-notice" class="notice">注意：必須使用 Safari 進行 App 安裝（Line 內建瀏覽器也可以）</div>
+      <a id="ios-install" href="#" class="button primary" onclick="return confirm('您確定要更新 iOS MDM 嗎？\n請確認未上鎖且相機狀態恢復後再安裝。')">安裝 iOS MDM app</a>
+      <div class="note">
+        僅限 iOS14 以上版本且 64 位元手機<br>請確認於未上鎖且相機狀態恢復後再安裝
+      </div>
+      <div class="instructions-step">
+        安裝步驟：<br>
+        1. 點選上方安裝按鈕。<br>
+        2. 出現安裝訊息後，點選「安裝」。<br>
+        3. 回主畫面，檢查 App 是否安裝完成。
+      </div>
+    </div>
+
+    <!-- Android 區塊 -->
+    <div id="android-section" class="card hidden" role="tabpanel" aria-labelledby="tab-android">
+      <div class="congrats icon-title"><i class="fab fa-android"></i> Android MDM V8.11 安裝</div>
+      <div id="android-browser-notice" class="notice">注意：瀏覽器必須支援 APK 下載（Line 內建瀏覽器不支援，請點右上角選擇「以其他應用程式開啟」）</div>
+      <a id="android-install" href="IPA/MDM_8.11.apk" class="button primary" download onclick="return confirm('您確定要更新 Android MDM 嗎？\n請確認於未上鎖狀態再安裝。')">安裝 Android MDM app</a>
+      <div id="android-apk-missing" class="notice hidden">找不到 MDM_8.11.apk（請把 APK 放在與此頁相同資料夾）</div>
+      <div class="note">
+        僅限 Android 8 以上版本手機<br>請確認於未上鎖狀態再安裝
+      </div>
+      <div class="instructions-step">
+        安裝步驟：<br>
+        1. 點選上方安裝按鈕。<br>
+        2. 瀏覽器會下載安裝檔。<br>
+        3. 若跳出選擇應用程式，Android 5/6/7 建議選「Google 雲端硬碟」，Android 8 建議選「Chrome」。<br>
+        4. 若未自動啟動安裝，請至檔案總管 App 中手動安裝。
+      </div>
+    </div>
+
+    <div class="fineprint">僅針對手機版版面最佳化</div>
+  </div>
+
+  <script>
+    function checkTime(i) {
+      return i < 10 ? "0" + i : i;
+    }
+
+    function isIOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    }
+
+    function isAndroid() {
+      return /Android/i.test(navigator.userAgent);
+    }
+
+    function isSafariOnIOS() {
+      // iOS 上所有瀏覽器都用 WebKit，但 Safari 的 UA 通常包含 Safari 且不包含 CriOS/FxiOS/EdgiOS
+      const ua = navigator.userAgent;
+      return isIOS() && /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
+    }
+
+    function isLineInAppBrowser() {
+      return /Line\//i.test(navigator.userAgent);
+    }
+
+    function startTime() {
+      const today = new Date();
+      const h = today.getHours();
+      const m = checkTime(today.getMinutes());
+      const s = checkTime(today.getSeconds());
+      document.getElementById('time').innerHTML = "現在時間是 " + h + ":" + m + ":" + s;
+      setTimeout(startTime, 500);
+    }
+
+    function showSection(platform) {
+      document.getElementById('ios-section').classList.add('hidden');
+      document.getElementById('android-section').classList.add('hidden');
+      document.getElementById(`${platform}-section`).classList.remove('hidden');
+
+      const tabIos = document.getElementById('tab-ios');
+      const tabAndroid = document.getElementById('tab-android');
+      if (tabIos && tabAndroid) {
+        tabIos.classList.toggle('active', platform === 'ios');
+        tabAndroid.classList.toggle('active', platform === 'android');
+        tabIos.setAttribute('aria-selected', String(platform === 'ios'));
+        tabAndroid.setAttribute('aria-selected', String(platform === 'android'));
+      }
+    }
+
+    async function checkAndroidApkExists() {
+      const installLink = document.getElementById('android-install');
+      const missingNotice = document.getElementById('android-apk-missing');
+      try {
+        const res = await fetch(installLink.getAttribute('href'), { method: 'HEAD', cache: 'no-store' });
+        if (!res.ok) {
+          installLink.classList.add('disabled');
+          missingNotice.classList.remove('hidden');
+        }
+      } catch (_) {
+        // 檔案系統 (file://) 可能不允許 HEAD；不強制阻擋，只在使用者點擊時由瀏覽器處理。
+      }
+    }
+
+    function updateNotices() {
+      const iosNotice = document.getElementById('ios-browser-notice');
+      if (isIOS() && isSafariOnIOS()) {
+        iosNotice.classList.add('ok');
+      } else {
+        iosNotice.classList.remove('ok');
+      }
+
+      const androidNotice = document.getElementById('android-browser-notice');
+      if (isAndroid() && isLineInAppBrowser()) {
+        androidNotice.classList.remove('hidden');
+      } else {
+        // 其他情況也保留提示文字（不隱藏），避免使用者看不到重點
+        androidNotice.classList.remove('hidden');
+      }
+    }
+
+    function autoSelectPlatform() {
+      if (isAndroid()) {
+        showSection('android');
+      } else {
+        showSection('ios');
+      }
+    }
+
+    function setupIosInstallLink() {
+      const link = document.getElementById('ios-install');
+      const manifestUrl = new URL('/manifest.plist', window.location.href).toString();
+      link.href = `itms-services://?action=download-manifest&url=${encodeURIComponent(manifestUrl)}`;
+    }
+
+    startTime();
+    autoSelectPlatform();
+    updateNotices();
+    setupIosInstallLink();
+    checkAndroidApkExists();
+  </script>
+
+
+</body>
+</html>

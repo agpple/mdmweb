@@ -1,0 +1,7 @@
+name = "mdm-install-page"
+main = "src/worker.js"
+compatibility_date = "2026-07-04"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"

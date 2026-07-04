@@ -1,0 +1,15 @@
+{
+  "name": "mdm-install-page",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cloudflare Workers MDM install page",
+  "main": "src/worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.24.3"
+  }
+}
